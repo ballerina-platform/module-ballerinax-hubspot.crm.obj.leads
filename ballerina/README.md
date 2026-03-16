@@ -2,7 +2,14 @@
 
 [HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/hubspot.crm.obj.leads` package offers APIs to connect and interact with the [HubSpot CRM Leads API](https://developers.hubspot.com/docs/reference/api/crm/objects/leads) endpoints, specifically based on the [HubSpot REST API v3](https://developers.hubspot.com/docs/reference/api/overview).
+The HubSpot CRM Leads connector provides APIs to connect and interact with the [HubSpot CRM Leads API](https://developers.hubspot.com/docs/reference/api/crm/objects/leads) endpoints, specifically based on the [HubSpot REST API v3](https://developers.hubspot.com/docs/reference/api/overview).
+
+### Key Features
+
+- Create, read, update, and delete lead records in HubSpot CRM
+- List and search leads with filtering support
+- Associate leads with contacts and other CRM objects
+- Batch operations for bulk lead management
 
 ## Setup guide
 
