@@ -25,31 +25,31 @@ public type PostCrmV3ObjectsLeadsBatchReadReadQueries record {
     boolean archived = false;
 };
 
-# Standard error response structure returned by the Leads API.
+# Standard error response structure returned by the Leads API
 public type StandardError record {
-    # Optional sub-category providing additional error classification.
+    # Optional sub-category providing additional error classification
     record {} subCategory?;
-    # Contextual metadata map with string array values for the error.
+    # Contextual metadata map with string array values for the error
     record {|string[]...;|} context;
-    # Map of relevant links associated with the error response.
+    # Map of relevant links associated with the error response
     record {|string...;|} links;
-    # Unique identifier for the error instance.
+    # Unique identifier for the error instance
     string id?;
-    # High-level category classifying the type of error.
+    # High-level category classifying the type of error
     string category;
-    # Human-readable message describing the error.
+    # Human-readable message describing the error
     string message;
-    # List of detailed error entries associated with this error.
+    # List of detailed error entries associated with this error
     ErrorDetail[] errors;
-    # HTTP status code or status label for the error response.
+    # HTTP status code or status label for the error response
     string status;
 };
 
-# Paginated collection of associated object IDs.
+# Paginated collection of associated object IDs
 public type CollectionResponseAssociatedId record {
-    # Pagination cursors for navigating to the next or previous result page.
+    # Pagination cursors for navigating to the next or previous result page
     Paging paging?;
-    # Array of associated object IDs returned in this page.
+    # Array of associated object IDs returned in this page
     AssociatedId[] results;
 };
 
@@ -69,37 +69,37 @@ public type GetCrmV3ObjectsLeadsGetPageQueries record {
     string[] properties?;
 };
 
-# Defines an association target object and its association types.
+# Defines an association target object and its association types
 public type PublicAssociationsForObject record {
-    # List of association type specifications for the target object.
+    # List of association type specifications for the target object
     AssociationSpec[] types;
-    # Represents a public object identifier containing a unique ID string.
+    # Represents a public object identifier containing a unique ID string
     PublicObjectId to;
 };
 
-# Batch operation response containing lead results and status.
+# Batch operation response containing lead results and status
 public type BatchResponseSimplePublicObject record {
-    # Timestamp indicating when the batch operation completed.
+    # Timestamp indicating when the batch operation completed
     string completedAt;
-    # Timestamp indicating when the batch operation was requested.
+    # Timestamp indicating when the batch operation was requested
     string requestedAt?;
-    # Timestamp indicating when the batch operation started.
+    # Timestamp indicating when the batch operation started
     string startedAt;
-    # Map of supplemental links related to the batch response.
+    # Map of supplemental links related to the batch response
     record {|string...;|} links?;
-    # Array of lead objects returned by the batch operation.
+    # Array of lead objects returned by the batch operation
     SimplePublicObject[] results;
-    # Current processing status of the batch request.
+    # Current processing status of the batch request
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# A logical grouping of filters applied together when searching leads.
+# A logical grouping of filters applied together when searching leads
 public type FilterGroup record {
-    # Array of filter conditions within this group.
+    # Array of filter conditions within this group
     Filter[] filters;
 };
 
-# Detailed information about a specific error encountered in a request.
+# Detailed information about a specific error encountered in a request
 public type ErrorDetail record {
     # A specific category that contains more specific detail about the error
     string subCategory?;
@@ -113,85 +113,85 @@ public type ErrorDetail record {
     string message;
 };
 
-# Pagination object providing a reference to the next page of results.
+# Pagination object providing a reference to the next page of results
 public type ForwardPaging record {
-    # Pagination cursor object containing the token and link for retrieving the next page of results.
+    # Pagination cursor object containing the token and link for retrieving the next page of results
     NextPage next?;
 };
 
-# A minimal object representation containing only a unique identifier.
+# A minimal object representation containing only a unique identifier
 public type SimplePublicObjectId record {
-    # The unique identifier of the lead object.
+    # The unique identifier of the lead object
     string id;
 };
 
-# Batch upsert response including results, errors, and processing status for lead objects.
+# Batch upsert response including results, errors, and processing status for lead objects
 public type BatchResponseSimplePublicUpsertObjectWithErrors record {
-    # Timestamp when the batch operation completed.
+    # Timestamp when the batch operation completed
     string completedAt;
-    # Total number of errors encountered during the batch operation.
+    # Total number of errors encountered during the batch operation
     int:Signed32 numErrors?;
-    # Timestamp when the batch operation was requested.
+    # Timestamp when the batch operation was requested
     string requestedAt?;
-    # Timestamp when the batch operation began processing.
+    # Timestamp when the batch operation began processing
     string startedAt;
-    # Map of relevant hyperlinks associated with the batch response.
+    # Map of relevant hyperlinks associated with the batch response
     record {|string...;|} links?;
-    # Array of successfully upserted lead objects.
+    # Array of successfully upserted lead objects
     SimplePublicUpsertObject[] results;
-    # Array of errors encountered for individual records in the batch.
+    # Array of errors encountered for individual records in the batch
     StandardError[] errors?;
-    # Current processing status of the batch upsert request.
+    # Current processing status of the batch upsert request
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Input schema for batch reading leads by ID, specifying properties to return.
+# Input schema for batch reading leads by ID, specifying properties to return
 public type BatchReadInputSimplePublicObjectId record {
-    # List of properties to return along with their historical values.
+    # List of properties to return along with their historical values
     string[] propertiesWithHistory;
-    # The property to use as the unique identifier for lookup.
+    # The property to use as the unique identifier for lookup
     string idProperty?;
-    # List of lead object IDs to retrieve in the batch.
+    # List of lead object IDs to retrieve in the batch
     SimplePublicObjectId[] inputs;
-    # List of property names to include in the response.
+    # List of property names to include in the response
     string[] properties;
 };
 
-# Response object containing the results and status of a batch upsert operation for leads.
+# Response object containing the results and status of a batch upsert operation for leads
 public type BatchResponseSimplePublicUpsertObject record {
-    # Timestamp indicating when the batch operation completed.
+    # Timestamp indicating when the batch operation completed
     string completedAt;
-    # Timestamp indicating when the batch operation was requested.
+    # Timestamp indicating when the batch operation was requested
     string requestedAt?;
-    # Timestamp indicating when the batch operation started processing.
+    # Timestamp indicating when the batch operation started processing
     string startedAt;
-    # Map of related resource links associated with the batch response.
+    # Map of related resource links associated with the batch response
     record {|string...;|} links?;
-    # List of upserted lead objects returned by the batch operation.
+    # List of upserted lead objects returned by the batch operation
     SimplePublicUpsertObject[] results;
-    # Current processing status of the batch operation.
+    # Current processing status of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# A property value paired with its source information and the timestamp of the last update.
+# A property value paired with its source information and the timestamp of the last update
 public type ValueWithTimestamp record {
-    # Identifier of the source that set this property value.
+    # Identifier of the source that set this property value
     string sourceId?;
-    # The type of source that set this property value.
+    # The type of source that set this property value
     string sourceType;
-    # A human-readable label describing the value's source.
+    # A human-readable label describing the value's source
     string sourceLabel?;
-    # ID of the user who last updated this property value.
+    # ID of the user who last updated this property value
     int:Signed32 updatedByUserId?;
-    # The property value as a string.
+    # The property value as a string
     string value;
-    # Timestamp indicating when this value was last updated.
+    # Timestamp indicating when this value was last updated
     string timestamp;
 };
 
-# Input schema for a batch operation containing a list of lead object IDs.
+# Input schema for a batch operation containing a list of lead object IDs
 public type BatchInputSimplePublicObjectId record {
-    # List of lead object IDs to process in the batch request.
+    # List of lead object IDs to process in the batch request
     SimplePublicObjectId[] inputs;
 };
 
@@ -202,44 +202,44 @@ public type OAuth2RefreshTokenGrantConfig record {|
     string refreshUrl = "https://api.hubapi.com/oauth/v1/token";
 |};
 
-# Input schema for a batch upsert operation containing a list of lead objects to create or update.
+# Input schema for a batch upsert operation containing a list of lead objects to create or update
 public type BatchInputSimplePublicObjectBatchInputUpsert record {
-    # Array of lead records to upsert in the batch operation.
+    # Array of lead records to upsert in the batch operation
     SimplePublicObjectBatchInputUpsert[] inputs;
 };
 
-# A paginated collection of lead records with a total count and forward paging cursor.
+# A paginated collection of lead records with a total count and forward paging cursor
 public type CollectionResponseWithTotalSimplePublicObjectForwardPaging record {
-    # Total number of leads matching the request.
+    # Total number of leads matching the request
     int:Signed32 total;
-    # Pagination object providing a reference to the next page of results.
+    # Pagination object providing a reference to the next page of results
     ForwardPaging paging?;
-    # Array of lead records returned in the current page.
+    # Array of lead records returned in the current page
     SimplePublicObject[] results;
 };
 
-# Represents a single lead record with its properties, timestamps, and archive status.
+# Represents a single lead record with its properties, timestamps, and archive status
 public type SimplePublicObject record {
-    # Timestamp when the lead record was created.
+    # Timestamp when the lead record was created
     string createdAt;
-    # Indicates whether the lead record is archived.
+    # Indicates whether the lead record is archived
     boolean archived?;
-    # Timestamp when the lead record was archived.
+    # Timestamp when the lead record was archived
     string archivedAt?;
-    # Map of property names to their historical values with timestamps.
+    # Map of property names to their historical values with timestamps
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
-    # Unique identifier of the lead record.
+    # Unique identifier of the lead record
     string id;
-    # Map of lead property names to their current values.
+    # Map of lead property names to their current values
     record {|string?...;|} properties;
-    # Timestamp when the lead record was last updated.
+    # Timestamp when the lead record was last updated
     string updatedAt;
 };
 
-# Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint.
+# Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint
 @display {label: "Connection Config"}
 public type ConnectionConfig record {|
-    # Provides Auth configurations needed when communicating with a remote HTTP endpoint.
+    # Provides Auth configurations needed when communicating with a remote HTTP endpoint
     http:BearerTokenConfig|OAuth2RefreshTokenGrantConfig|ApiKeysConfig auth;
     # The HTTP version understood by the client
     http:HttpVersion httpVersion = http:HTTP_2_0;
@@ -276,7 +276,7 @@ public type ConnectionConfig record {|
     # Enables the inbound payload validation functionality which provided by the constraint package. Enabled by default
     boolean validation = true;
     # Enables relaxed data binding on the client side. When enabled, `nil` values are treated as optional, 
-    # and absent fields are handled as `nilable` types. Enabled by default.
+    # and absent fields are handled as `nilable` types. Enabled by default
     boolean laxDataBinding = true;
 |};
 
@@ -286,163 +286,163 @@ public type PatchCrmV3ObjectsLeadsLeadsIdUpdateQueries record {
     string idProperty?;
 };
 
-# Represents a public object identifier containing a unique ID string.
+# Represents a public object identifier containing a unique ID string
 public type PublicObjectId record {
-    # Unique identifier of the public object.
+    # Unique identifier of the public object
     string id;
 };
 
-# Pagination cursors for navigating to the next or previous result page.
+# Pagination cursors for navigating to the next or previous result page
 public type Paging record {
-    # Pagination cursor object containing the token and link for retrieving the next page of results.
+    # Pagination cursor object containing the token and link for retrieving the next page of results
     NextPage next?;
-    # Pagination cursor details for navigating to the previous result page.
+    # Pagination cursor details for navigating to the previous result page
     PreviousPage prev?;
 };
 
-# Request payload for searching leads with filters, sorting, and pagination.
+# Request payload for searching leads with filters, sorting, and pagination
 public type PublicObjectSearchRequest record {
-    # Full-text search query string to match against lead records.
+    # Full-text search query string to match against lead records
     string query?;
-    # Maximum number of results to return per page.
+    # Maximum number of results to return per page
     int:Signed32 'limit?;
-    # Cursor token for retrieving the next page of results.
+    # Cursor token for retrieving the next page of results
     string after?;
-    # List of sort criteria to order the search results.
+    # List of sort criteria to order the search results
     string[] sorts?;
-    # List of property names to include in the response.
+    # List of property names to include in the response
     string[] properties?;
-    # Groups of filters used to narrow search results.
+    # Groups of filters used to narrow search results
     FilterGroup[] filterGroups?;
 };
 
-# Input object for a batch upsert operation, containing the lead's identifier and property values to create or update.
+# Input object for a batch upsert operation, containing the lead's identifier and property values to create or update
 public type SimplePublicObjectBatchInputUpsert record {
-    # Name of the property used as the unique identifier.
+    # Name of the property used as the unique identifier
     string idProperty?;
-    # Trace identifier for tracking the write operation.
+    # Trace identifier for tracking the write operation
     string objectWriteTraceId?;
-    # Unique identifier of the lead record to upsert.
+    # Unique identifier of the lead record to upsert
     string id;
-    # Map of property names to values for the lead record.
+    # Map of property names to values for the lead record
     record {|string...;|} properties;
 };
 
-# Batch operation response containing lead results, processing status, timestamps, and any errors encountered during execution.
+# Batch operation response containing lead results, processing status, timestamps, and any errors encountered during execution
 public type BatchResponseSimplePublicObjectWithErrors record {
-    # Timestamp when the batch operation completed.
+    # Timestamp when the batch operation completed
     string completedAt;
-    # Total number of errors encountered in the batch.
+    # Total number of errors encountered in the batch
     int:Signed32 numErrors?;
-    # Timestamp when the batch operation was requested.
+    # Timestamp when the batch operation was requested
     string requestedAt?;
-    # Timestamp when the batch operation began processing.
+    # Timestamp when the batch operation began processing
     string startedAt;
-    # Map of relevant links associated with the batch response.
+    # Map of relevant links associated with the batch response
     record {|string...;|} links?;
-    # List of successfully processed lead objects in the batch.
+    # List of successfully processed lead objects in the batch
     SimplePublicObject[] results;
-    # List of errors for records that failed in the batch.
+    # List of errors for records that failed in the batch
     StandardError[] errors?;
-    # Current processing status of the batch operation.
+    # Current processing status of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Input payload for creating or updating a lead object with custom properties.
+# Input payload for creating or updating a lead object with custom properties
 public type SimplePublicObjectInput record {
-    # Trace identifier for tracking the write operation.
+    # Trace identifier for tracking the write operation
     string objectWriteTraceId?;
-    # Key-value map of lead property names and their values.
+    # Key-value map of lead property names and their values
     record {|string...;|} properties;
 };
 
-# Paginated collection of lead objects including their associations.
+# Paginated collection of lead objects including their associations
 public type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging record {
-    # Pagination object providing a reference to the next page of results.
+    # Pagination object providing a reference to the next page of results
     ForwardPaging paging?;
-    # Array of lead objects returned in this page of results.
+    # Array of lead objects returned in this page of results
     SimplePublicObjectWithAssociations[] results;
 };
 
-# Defines the category and type of an association between objects.
+# Defines the category and type of an association between objects
 public type AssociationSpec record {
-    # Category of the association: HubSpot-defined, user-defined, or integrator-defined.
+    # Category of the association: HubSpot-defined, user-defined, or integrator-defined
     "HUBSPOT_DEFINED"|"USER_DEFINED"|"INTEGRATOR_DEFINED" associationCategory;
-    # Numeric identifier for the specific association type.
+    # Numeric identifier for the specific association type
     int:Signed32 associationTypeId;
 };
 
-# A lead object with its properties, metadata, and related associations.
+# A lead object with its properties, metadata, and related associations
 public type SimplePublicObjectWithAssociations record {
-    # Map of associated object types to their associated record collections.
+    # Map of associated object types to their associated record collections
     record {|CollectionResponseAssociatedId...;|} associations?;
-    # Timestamp when the lead record was created.
+    # Timestamp when the lead record was created
     string createdAt;
-    # Indicates whether the lead record is archived.
+    # Indicates whether the lead record is archived
     boolean archived?;
-    # Timestamp when the lead record was archived.
+    # Timestamp when the lead record was archived
     string archivedAt?;
-    # Map of property names to their historical values with timestamps.
+    # Map of property names to their historical values with timestamps
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
-    # Unique identifier of the lead record.
+    # Unique identifier of the lead record
     string id;
-    # Key-value map of the lead's current property names and values.
+    # Key-value map of the lead's current property names and values
     record {|string?...;|} properties;
-    # Timestamp when the lead record was last updated.
+    # Timestamp when the lead record was last updated
     string updatedAt;
 };
 
-# Defines a filter condition used to query leads by property and operator.
+# Defines a filter condition used to query leads by property and operator
 public type Filter record {
-    # Upper bound value for BETWEEN range filter operations.
+    # Upper bound value for BETWEEN range filter operations
     string highValue?;
-    # The name of the lead property to filter by.
+    # The name of the lead property to filter by
     string propertyName;
-    # A list of values to match against for the filter.
+    # A list of values to match against for the filter
     string[] values?;
-    # A single value to match against for the filter.
+    # A single value to match against for the filter
     string value?;
-    # The comparison operator used to evaluate the filter condition.
+    # The comparison operator used to evaluate the filter condition
     "EQ"|"NEQ"|"LT"|"LTE"|"GT"|"GTE"|"BETWEEN"|"IN"|"NOT_IN"|"HAS_PROPERTY"|"NOT_HAS_PROPERTY"|"CONTAINS_TOKEN"|"NOT_CONTAINS_TOKEN" operator;
 };
 
-# Pagination cursor details for navigating to the previous result page.
+# Pagination cursor details for navigating to the previous result page
 public type PreviousPage record {
-    # The cursor token representing the start of the previous page.
+    # The cursor token representing the start of the previous page
     string before;
-    # The URL link to retrieve the previous page of results.
+    # The URL link to retrieve the previous page of results
     string link?;
 };
 
-# A batch input wrapper containing an array of lead creation inputs.
+# A batch input wrapper containing an array of lead creation inputs
 public type BatchInputSimplePublicObjectInputForCreate record {
-    # An array of lead objects to create in a batch operation.
+    # An array of lead objects to create in a batch operation
     SimplePublicObjectInputForCreate[] inputs;
 };
 
-# A batch input wrapper containing an array of lead update inputs.
+# A batch input wrapper containing an array of lead update inputs
 public type BatchInputSimplePublicObjectBatchInput record {
-    # An array of lead objects to update in a batch operation.
+    # An array of lead objects to update in a batch operation
     SimplePublicObjectBatchInput[] inputs;
 };
 
-# Represents a lead record returned after an upsert operation, including metadata and properties.
+# Represents a lead record returned after an upsert operation, including metadata and properties
 public type SimplePublicUpsertObject record {
-    # The timestamp when the lead record was created.
+    # The timestamp when the lead record was created
     string createdAt;
-    # Indicates whether the lead record is archived.
+    # Indicates whether the lead record is archived
     boolean archived?;
-    # The timestamp when the lead record was archived.
+    # The timestamp when the lead record was archived
     string archivedAt?;
-    # Indicates whether the lead was newly created by the upsert.
+    # Indicates whether the lead was newly created by the upsert
     boolean 'new;
-    # A map of lead property names to their historical values with timestamps.
+    # A map of lead property names to their historical values with timestamps
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
-    # The unique identifier of the lead record.
+    # The unique identifier of the lead record
     string id;
-    # A map of lead property names to their current values.
+    # A map of lead property names to their current values
     record {|string...;|} properties;
-    # The timestamp when the lead record was last updated.
+    # The timestamp when the lead record was last updated
     string updatedAt;
 };
 
@@ -460,46 +460,46 @@ public type GetCrmV3ObjectsLeadsLeadsIdGetByIdQueries record {
     string[] properties?;
 };
 
-# Input schema for updating a lead object in a batch operation, identified by ID or a unique property.
+# Input schema for updating a lead object in a batch operation, identified by ID or a unique property
 public type SimplePublicObjectBatchInput record {
-    # The property name used as a unique identifier instead of the default record ID.
+    # The property name used as a unique identifier instead of the default record ID
     string idProperty?;
-    # Trace identifier for diagnosing and tracking the write operation.
+    # Trace identifier for diagnosing and tracking the write operation
     string objectWriteTraceId?;
-    # The unique identifier of the lead record to update.
+    # The unique identifier of the lead record to update
     string id;
-    # Key-value pairs of lead properties to update.
+    # Key-value pairs of lead properties to update
     record {|string...;|} properties;
 };
 
-# Pagination cursor object containing the token and link for retrieving the next page of results.
+# Pagination cursor object containing the token and link for retrieving the next page of results
 public type NextPage record {
-    # The relative URL to retrieve the next page of results.
+    # The relative URL to retrieve the next page of results
     string link?;
-    # Cursor token used to fetch the next page of results.
+    # Cursor token used to fetch the next page of results
     string after;
 };
 
-# Represents an associated object, defined by its ID and association type.
+# Represents an associated object, defined by its ID and association type
 public type AssociatedId record {
-    # The unique identifier of the associated object.
+    # The unique identifier of the associated object
     string id;
-    # The type of association between the objects.
+    # The type of association between the objects
     string 'type;
 };
 
-# Provides API key configurations needed when communicating with a remote HTTP endpoint.
+# Provides API key configurations needed when communicating with a remote HTTP endpoint
 public type ApiKeysConfig record {|
     string privateAppLegacy;
     string privateApp;
 |};
 
-# Input schema for creating a new lead, including its properties and associations.
+# Input schema for creating a new lead, including its properties and associations
 public type SimplePublicObjectInputForCreate record {
-    # A list of associations linking the new lead to other CRM objects.
+    # A list of associations linking the new lead to other CRM objects
     PublicAssociationsForObject[] associations;
-    # Trace identifier for diagnosing and tracking the write operation.
+    # Trace identifier for diagnosing and tracking the write operation
     string objectWriteTraceId?;
-    # Key-value pairs of property values to set on the new lead.
+    # Key-value pairs of property values to set on the new lead
     record {|string...;|} properties;
 };
